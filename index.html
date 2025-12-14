@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PSX Swing Dashboard</title>
+  <link rel="stylesheet" href="src/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>PSX KSE-100 Swing Dashboard</h1>
+      <p class="subtitle">Personal decision-support with explainable signals</p>
+    </div>
+    <div class="controls">
+      <label class="file-label">Upload EOD CSV<input id="csvInput" type="file" accept=".csv" /></label>
+      <button id="clearData" class="ghost">Clear Stored Data</button>
+    </div>
+  </header>
+
+  <section class="filters">
+    <div>
+      <label>Signal
+        <select id="signalFilter">
+          <option value="all">All</option>
+          <option value="Watch">Watch</option>
+          <option value="Prepare">Prepare</option>
+          <option value="Enter">Enter</option>
+        </select>
+      </label>
+    </div>
+    <div>
+      <label>Score ≥ <input type="number" id="scoreMin" value="0" min="0" max="100" /></label>
+    </div>
+    <div>
+      <label>Volume Spike ≥ <input type="number" id="volSpikeMin" value="0" step="0.1" /></label>
+    </div>
+    <div>
+      <label>Symbol <input type="text" id="symbolSearch" placeholder="Filter by symbol" /></label>
+    </div>
+    <div class="settings">
+      <label>Target % <input type="number" id="targetPct" value="5" step="0.5" /></label>
+      <label>Horizon (days) <input type="number" id="targetDays" value="10" step="1" /></label>
+      <label class="toggle"><input type="checkbox" id="bollingerToggle" checked /> Show Bollinger</label>
+    </div>
+  </section>
+
+  <main class="layout">
+    <section class="table-panel">
+      <div class="panel-header">
+        <h2>Signals</h2>
+        <p class="muted">Fully explainable scores – hover for details</p>
+      </div>
+      <div class="table-wrapper">
+        <table id="signalTable">
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Signal</th>
+              <th>Total Score</th>
+              <th>Highlights</th>
+              <th>Stop-loss</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="detail-panel">
+      <div class="panel-header">
+        <div>
+          <h2 id="detailSymbol">Select a row</h2>
+          <p class="muted" id="detailDescription">Upload CSV to see price action.</p>
+        </div>
+        <div class="score-chip" id="detailScore">0</div>
+      </div>
+      <div class="chart-stack">
+        <canvas id="priceChart" width="900" height="360"></canvas>
+        <canvas id="volumeChart" width="900" height="140"></canvas>
+      </div>
+      <div class="indicator-breakdown" id="indicatorBreakdown"></div>
+      <div class="history-panel" id="historyPanel"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Designed for calm, explainable swing decisions. End-of-day only. No advice.</p>
+  </footer>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

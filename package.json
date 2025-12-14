@@ -1,0 +1,13 @@
+{
+  "name": "stock-break-out",
+  "version": "1.0.0",
+  "description": "PSX swing decision support dashboard",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
